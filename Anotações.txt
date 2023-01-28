@@ -1,0 +1,16 @@
+
+flask run -> Rodar a aplicação.
+    - Para funcionar o arquivo de execução deve ser app.py e dentro do mesmo terá que existir um app = Flask(__name__)
+
+Criar endpoint:
+    @app.crud("/endpoint_name")
+    function()
+
+Json:
+    São strings, apesar da semelhança com o dict do python. Importante frisar que o flask está fazendo uma conversão de dict or list para json para que possa ser executado.
+
+    Solicitar um json: import request junto do Flask
+        request.get_json()
+    
+Return:
+    podemos indicar o tipo de retorno recebido como por exemplo um 200 que indica "ok", já com 201 indicamos ok, recebemos algo.

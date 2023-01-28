@@ -1,2 +1,3 @@
 # Flask-Python
-Repositório criado com o intuíto de adicionar todos os conhecimentos e estudos feitos em Flask
+
+Primeiro Rest API criado em flask 'Store'.
