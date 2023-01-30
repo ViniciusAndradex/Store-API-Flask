@@ -18,3 +18,6 @@ Docker:
 	no terminal -> docker build -t nome da build (rest-apis-flask-python) . [O ponto indica diretorio]
 
 - docker comand;
+
+- Docker via terminal:
+	docker run -(d - para rodar em segundo plano)p port:5000 image
