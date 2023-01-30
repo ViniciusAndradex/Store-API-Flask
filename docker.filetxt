@@ -1,0 +1,20 @@
+Docker:
+
+- Hypervisor: é uma emulação de hardware que permite a execução de apps de outros sistemas operacionais;
+
+- Docker é muito mais eficiente pois diferente de uma emulção ele não necessita de uma demanda de hardware, pois o mesmo é executado dentro do próprio sistema operacional, assim, quando existe a necessidade de executar códigos o mesmo já é feito diretamente no sistema que já estamos utilizando. Uma outra vantagem é que por ser muito leve podemos rodar mais de um container no processo pois é muito leve.
+
+- Desvantagem seria justamente a questão do sistema operacional que é o mesmo para todos os containers.
+
+-Docker File:
+	FROM baseImage
+	EXPOSE port (5000 flask padrão)
+	WORKDIR /app (padrão, pois o app sempre existirá no meu programa)
+	RUN pip install flask (padrão, pois a imagem utilizada não trás o flask como padrão)
+	COPY . . (Desta forma eu irei copiar tudo que está em app (diretório atual))
+	CMD ["flask", "run", "--host", "0.0.0.0"] -> (São os comando que queremos utilizar no container, os já descritos são os meus padrões)
+	
+	após a construção da file:
+	no terminal -> docker build -t nome da build (rest-apis-flask-python) . [O ponto indica diretorio]
+
+- docker comand;
