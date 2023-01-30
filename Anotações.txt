@@ -14,3 +14,12 @@ Json:
     
 Return:
     podemos indicar o tipo de retorno recebido como por exemplo um 200 que indica "ok", já com 201 indicamos ok, recebemos algo.
+
+-------------------------------------------------------------------------------
+Smoterest:
+
+- Utilizaremos ids para nossos dados
+
+1º passo -> requirements.txt -> para indicar quais bibliotecas o projeto está se utilizando.
+2º passo -> .flaskenv -> indicar as variáveis utilizadas no projeto, define as configurações iniciais do projeto.
+
