@@ -9,11 +9,15 @@ Criar endpoint:
 Json:
     São strings, apesar da semelhança com o dict do python. Importante frisar que o flask está fazendo uma conversão de dict or list para json para que possa ser executado.
 
+    Devemos sempre retornar em formato de lista.
+
     Solicitar um json: import request junto do Flask
         request.get_json()
     
 Return:
     podemos indicar o tipo de retorno recebido como por exemplo um 200 que indica "ok", já com 201 indicamos ok, recebemos algo.
+
+    Utilizaremos uma ferramento do flask smorest: abort -> os tipos de retornos são encontrado na documentação
 
 -------------------------------------------------------------------------------
 Smorest:
