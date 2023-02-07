@@ -10,7 +10,7 @@ class ItemSchemas(Schema):
 
 class ItemUpdateSchemas(Schema):
     name = fields.Str()
-    price = fields.Str()
+    price = fields.Float()
 
 
 class StoreSchemas(Schema):
