@@ -68,3 +68,22 @@ Marshmellow schema:
     Quando não houver a necessidade de um envio ou a indicação de que uma variavel deva receber algo como ID, basta deixarmos os campos vazios.
 
     -> Ao utlizarmos destas classes, já fazemos as validações mais obvias como o tipo do dado, a presença de um elemento no json.
+-------------------------------------------------------------------------------
+
+Utilizando dos schemas:
+    basta utilizarmos o decorador de Blueprint 
+
+    @blp.arguments(Schema) -> O valor é direcionado para o método da classe.
+
+    OBS: o dado adicionado como argumento do meu schema também deve ser transposto quando vamos utilizalo em resource, portatno adicione como parâmetro do método.
+
+    OBS2: Os étodos data das minhas rotas não deve mais existir pois o parâmetro passado já faz a solicitação deste json, basta adicionar o mesmo nome.
+        @blp.arguments(ItemsSchema)
+        def exemplo(self, item_data -> Esse cara já faz o papel do get_json):
+
+    Exemplo:
+        @blp.arguments(ItemSchemas)
+        def exemplo(self, item_data(Parametro de decorador), item_id(Parametro de método))
+
+    Vantagem:
+        Ao utilizarmos de schemas o nosso swagger também se atualiza e indica melhor o que é necessário para cada json solicitado indicando o tipo de dado e as estruturas abaixo de todos os endpoints.

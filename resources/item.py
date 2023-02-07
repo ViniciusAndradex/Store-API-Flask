@@ -1,8 +1,9 @@
 import uuid
-from flask import request
+# from flask import request
 from flask.views import MethodView
 from flask_smorest import Blueprint, abort
 from db import items
+from schemas import ItemSchemas, ItemUpdateSchemas
 
 blp = Blueprint("Items", __name__, description="Operations on items")
 
@@ -21,11 +22,8 @@ class Item(MethodView):
         except KeyError:
             abort(404, message="Item not found.")
 
-    def put(self, item_id):
-        item_data = request.get_json()
-        if ("name" not in item_data and
-        "price" not in item_data):
-            abort(400, "Bad request. Ensure 'price' and 'name' are included in the JSON payload")
+    @blp.arguments(ItemUpdateSchemas)
+    def put(self, item_data, item_id):
         try:
             item = items[item_id]
             item |= item_data
@@ -40,14 +38,8 @@ class  ItemList(MethodView):
     def get(self):
         return {"items": list(items.values())}
 
-    def post(self):
-        item_data = request.get_json()
-        if ("price" not in item_data or
-            "store_id" not in item_data or
-            "name" not in item_data):
-            abort(400, "Bad request. Ensure 'price', 'store_id', and 'name' are included in the JSON payload")
-        if item_data["store_id"] not in stores:
-            abort(404, message="Store not found")
+    @blp.arguments(ItemSchemas)
+    def post(self, item_data):
         for item in items.values():
             if (item_data["name"] == items["name"] and item_data["store_id"] == items["store_id"]):
                 abort(400, message='Item already exists.')

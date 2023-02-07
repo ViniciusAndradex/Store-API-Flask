@@ -28,3 +28,4 @@ Docker:
 	-p Publish a container’s port(s) to the host
 	-w Working directory inside the container
 	-v Bind mount a volume -> Está mostrando ao container todos os arquivos do repositório até o app.
+	
