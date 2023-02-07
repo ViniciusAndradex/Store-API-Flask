@@ -27,3 +27,25 @@ Smorest:
 1º passo -> requirements.txt -> para indicar quais bibliotecas o projeto está se utilizando.
 2º passo -> .flaskenv -> indicar as variáveis utilizadas no projeto, define as configurações iniciais do projeto. -> FLASK_DEBUG=1 com está variável o meu server se atualiza sozinho.
 
+-------------------------------------------------------------------------------
+Blueprint:
+    Este metodo interliga as minhas rotas as classes criadas.
+    blp = Blueprint("nome", __name__(nome unico), description="Descrição que ira para a documentação")
+
+-------------------------------------------------------------------------------
+Rest-apis
+    A api vira POO e portanto subdividimos nossas funções em classes em suas rotas correspondetes, no fim o app apenas chamará
+
+    Configurações:
+        app.config["PROPAGATE_EXCEPTIONS"] = True -> Pedi que caso ocorra alguma exception, a mesma seja propagada e visualizada na aplicação principal.
+
+        app.config["API_TITLE"] = "Stores REST API" -> Indica o titulo da API na documentação
+        app.config[API_VERSION] = "v1" -> Indicamos aversão da API que estamos trabalhando.
+
+        app.config["OPENAPI_VRSION"] = "3.0.3" -> É um padrão para documentação
+
+        app.config["OPENAPI_URL_PREFIX"] = "/" -> Indica qual a raiz da API
+
+        app.config["OPENAPI_SWAGGER_UI_PATH] = "/swagger-ui" -> URL para acessar a minha API
+
+        app.config["OPENAPI_SWAGGER_UI_URL"] = "https://cdn.jsdelivr.net/npm/swagger-ui-dist/" -> Este valor indica aonde deve ser carregado as minhas informações, que serão geradas no PATH indicado acima.

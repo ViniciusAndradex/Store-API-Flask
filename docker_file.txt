@@ -20,4 +20,11 @@ Docker:
 - docker comand;
 
 - Docker via terminal:
-	docker run -(d - para rodar em segundo plano)p port:5000 image
+	docker run -(d - para rodar em segundo plano)p port[padrão 5000]:5000 image
+
+- Container atualizar conforme as alterações do código:
+	docker run -dp 5005:500 -w /app -v "$(pwd):/app" nome do volume
+	-d Run container in background and print container ID
+	-p Publish a container’s port(s) to the host
+	-w Working directory inside the container
+	-v Bind mount a volume -> Está mostrando ao container todos os arquivos do repositório até o app.
