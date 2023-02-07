@@ -49,3 +49,22 @@ Rest-apis
         app.config["OPENAPI_SWAGGER_UI_PATH] = "/swagger-ui" -> URL para acessar a minha API
 
         app.config["OPENAPI_SWAGGER_UI_URL"] = "https://cdn.jsdelivr.net/npm/swagger-ui-dist/" -> Este valor indica aonde deve ser carregado as minhas informações, que serão geradas no PATH indicado acima.
+-------------------------------------------------------------------------------
+Marshmellow schema:
+    Devemos utilizar para defuinir quais as validações dos meus dados e se estão corretos, portanto, ao utilizarmos destes métodos indicaremos a API o que queremos receber.
+
+    imports:
+        from marshmallow import Schema, field
+
+    class **(Schema):
+        dado_json = filds.type(existem validações para este dado)
+    
+    fields.Str(dump_only=True(Este dado indica que somente queremos devolver os dados))
+    dump_only = Este é um dado que não vem com um json pois este dado é atribuido pela propria API como no caso de ID de um objeto, ou seja, o mesmo recebe o dado quando enviamos o json.
+
+    filds.Str(required=True(podemos enviar os dados e recebelos))
+    required = Este dado deve vir no json e por tanto ele necessariamente precisa estar no mesmo.
+
+    Quando não houver a necessidade de um envio ou a indicação de que uma variavel deva receber algo como ID, basta deixarmos os campos vazios.
+
+    -> Ao utlizarmos destas classes, já fazemos as validações mais obvias como o tipo do dado, a presença de um elemento no json.
