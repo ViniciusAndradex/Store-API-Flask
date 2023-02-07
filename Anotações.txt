@@ -86,4 +86,14 @@ Utilizando dos schemas:
         def exemplo(self, item_data(Parametro de decorador), item_id(Parametro de método))
 
     Vantagem:
-        Ao utilizarmos de schemas o nosso swagger também se atualiza e indica melhor o que é necessário para cada json solicitado indicando o tipo de dado e as estruturas abaixo de todos os endpoints.
+        Ao utilizarmos de schemas o nosso swagger também se atualiza e indica melhor o que é necessário para cada json solicitado indicando o tipo de dado e os schemas ficam descritos abaixo de todos os endpoints.
+--------------------------------------------------------------------------------
+
+Decoradores flask_smorest:
+-> A ordem dos decoradores importam, pois em alguns casos o retorno que queremos entregar está no decorador anterior, por exemplo, em caso de o user fazer um update, o nosso retorno deve ser o valor final após a alteração, então não faz sentido o meu response está acima do arguments.
+    @blp.response(HTTP_response, Schema correspondente)
+
+Quando tivermos que devolver mais de 1 dado, nosso response tem que estar ciente e retornando o mesmo (Muito comum para gets)
+    @blp.response(many=True) -> irá retornar todos os dados, importanto informar que o retorno é em forma de lista portanto prestar atenção na lógica de return.
+
+Está mudança implica na documentação que nos mostra qual o retorno correto para o endpoint e tambŕm o tipo de retorno correto a ser recebido.
