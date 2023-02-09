@@ -1,5 +1,4 @@
 import uuid
-# from flask import request
 from flask.views import MethodView
 from flask_smorest import Blueprint, abort
 from db import stores
@@ -30,7 +29,7 @@ class Store(MethodView):
             store = stores[store_id]
             store |= store_data
 
-            return {"store": store}
+            return store
         except KeyError:
             abort(404, message="Store not found.")
 
@@ -51,3 +50,4 @@ class StoresList(MethodView):
         store = {**store_data, "id": store_id}
         stores[store_id] = store
         return store
+#Corrigir o Buscar loja por id.

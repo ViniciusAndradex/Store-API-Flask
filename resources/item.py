@@ -1,5 +1,4 @@
 import uuid
-# from flask import request
 from flask.views import MethodView
 from flask_smorest import Blueprint, abort
 from db import items
@@ -12,7 +11,7 @@ class Item(MethodView):
     @blp.response(200, ItemSchemas)
     def get(self, item_id):
         try:
-            return {"item": items[item_id]}
+            return items[item_id]
         except KeyError:
             abort(404, message="Store not found")
 
@@ -22,7 +21,7 @@ class Item(MethodView):
             return {"message": "Item deleted."}
         except KeyError:
             abort(404, message="Item not found.")
-# https://blog.teclado.com/python-dictionary-merge-update-operators/
+
     @blp.arguments(ItemUpdateSchemas)
     @blp.response(200, ItemSchemas)
     def put(self, item_data, item_id):
@@ -30,7 +29,7 @@ class Item(MethodView):
             item = items[item_id]
             item |= item_data
 
-            return {"item": item}
+            return item
         except KeyError:
             abort(404, message="Item not found.")
 

@@ -97,3 +97,4 @@ Quando tivermos que devolver mais de 1 dado, nosso response tem que estar ciente
     @blp.response(many=True) -> irá retornar todos os dados, importanto informar que o retorno é em forma de lista portanto prestar atenção na lógica de return.
 
 Está mudança implica na documentação que nos mostra qual o retorno correto para o endpoint e tambŕm o tipo de retorno correto a ser recebido.
+# https://blog.teclado.com/python-dictionary-merge-update-operators/
