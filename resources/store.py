@@ -2,13 +2,13 @@ import uuid
 from flask.views import MethodView
 from flask_smorest import Blueprint, abort
 from db import stores
-from schemas import StoreSchemas
+from schemas import StoreSchema
 
 blp = Blueprint("Stores", __name__, description="Operations on stores")
 
 @blp.route("/store/<string:store_id>")
 class Store(MethodView):
-    @blp.response(200, StoreSchemas)
+    @blp.response(200, StoreSchema)
     def get(self, store_id):
         try:
             return stores[store_id]
@@ -22,8 +22,8 @@ class Store(MethodView):
         except KeyError:
             abort(404, message="Store not found.")
 
-    @blp.arguments(StoreSchemas)
-    @blp.response(200, StoreSchemas)
+    @blp.arguments(StoreSchema)
+    @blp.response(200, StoreSchema)
     def put(self, store_data, store_id):
         try:
             store = stores[store_id]
@@ -35,13 +35,13 @@ class Store(MethodView):
 
 @blp.route("/store")
 class StoresList(MethodView):
-    @blp.response(200, StoreSchemas(many=True))
+    @blp.response(200, StoreSchema(many=True))
     def get(self):
         return stores.values()
 
 
-    @blp.arguments(StoreSchemas)
-    @blp.response(201, StoreSchemas)
+    @blp.arguments(StoreSchema)
+    @blp.response(201, StoreSchema)
     def post(self, store_data): 
         for store in stores.values():
             if store["name"] == store_data["name"]:

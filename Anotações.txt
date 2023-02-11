@@ -98,3 +98,26 @@ Quando tivermos que devolver mais de 1 dado, nosso response tem que estar ciente
 
 Está mudança implica na documentação que nos mostra qual o retorno correto para o endpoint e tambŕm o tipo de retorno correto a ser recebido.
 # https://blog.teclado.com/python-dictionary-merge-update-operators/
+
+
+-------------------------------------------------------------------------------
+SQLAlchemy: <from flask-sqlalchemy import SQLAlchemy>
+-> Permite de forma automatica criar as nossas tabelas e colunas através das sua funções e transforma isso em objetos no python.
+    1. criar models e os arquivos que terão o ORM de resource
+    2. importar o arquivo que possui a classe SQLAlchemy
+    3. class **(db.Model):
+        __tablename__ = 'nome'
+        colunas = objSQLAlquemy.Column(objSQLAlquemy.Tipo, ValoresOpcionais)
+        Valores Opcionais:
+            primary_key, unique, nullable
+            String(Numero Max de Characters)
+            Float(precision=2)
+    4. dentro de db.Column(db.ForeingKey('tabela.id'))
+    5. item_fk = db.relationship('TabelaModel_FK', back_populates='nome_tabela_atual') -> Faz com que a tabela indique a relação entre eles. Ao usarmos o relationship fazemos com que o objeto em questão veja os items associados a ele;
+        back_populates: indica de onde os dados estão vindo, ou seja, de onde vem a associção das tabelas
+        lazy: Indica a maneira de armazenar os dados e também diz a minha tabela que só deve buscar algo quando for solicitado.
+        
+        Ao fazermos está junção indicamos as minhas tabelas aonde elas devem ir buscar os dados, a tabela que possui a fk é onde está o objeto de ligação, ou seja, quando criamos uma loja e queremos associar um item a loja sabe através da relationship que deve ir até a outra ponta da relaçao.
+    6. criar um __init__ para a pasta models com a importação dos seus modulos nela, pois assim quando quisermos utiliza-los chamaremos apenas por ele;
+-------------------------------------------------------------------------------
+One to Many: 1 loja pode ter many items e 1 item está em 1 loja
