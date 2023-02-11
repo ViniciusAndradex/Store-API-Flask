@@ -120,4 +120,26 @@ SQLAlchemy: <from flask-sqlalchemy import SQLAlchemy>
         Ao fazermos está junção indicamos as minhas tabelas aonde elas devem ir buscar os dados, a tabela que possui a fk é onde está o objeto de ligação, ou seja, quando criamos uma loja e queremos associar um item a loja sabe através da relationship que deve ir até a outra ponta da relaçao.
     6. criar um __init__ para a pasta models com a importação dos seus modulos nela, pois assim quando quisermos utiliza-los chamaremos apenas por ele;
 -------------------------------------------------------------------------------
-One to Many: 1 loja pode ter many items e 1 item está em 1 loja
+Configruando SQLAlchemy:
+    1. em app.py import db e models (como possui o __init__ não precisamos fazer mais nada.)
+    2. user o pattern padrão do flask
+        i. Criar uma função que retorne o proprio app
+    3. criar a conexão do banco de dados:
+        app.config["SQLALCHEMY_DATABASE_URI"] = ''
+    4. criar uma variavel de ambiente para que possamos alterar o nosso banco para qualquer outro:
+        app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv('DATABASE_URL', '')
+    5. adicionar um parametro (db_url=none):
+        desta forma podemos indicar qual banco iremos utilizar ou criar um como indicado no item anterior
+            db_url or app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv('DATABASE_URL', '')
+    7. app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False:
+        para desabilitar os eventos do sistema que irão causar erros.
+    8. db.init_app(app):
+        para iniciar a conexão do SQLAlchemy com o meu app
+    9. criar o comando para criar as tabelas antes de tudo - Caso exista nada acontecerá:
+        with app.app_context:
+            db.create_all()
+
+                or
+        @app.before_first_request
+        def create_table():
+            db.create_all()

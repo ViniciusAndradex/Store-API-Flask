@@ -50,4 +50,3 @@ class StoresList(MethodView):
         store = {**store_data, "id": store_id}
         stores[store_id] = store
         return store
-#Corrigir o Buscar loja por id.
