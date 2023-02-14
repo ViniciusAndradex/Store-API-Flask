@@ -143,3 +143,9 @@ Configruando SQLAlchemy:
         @app.before_first_request
         def create_table():
             db.create_all()
+
+------------------------------------------------------------------------------
+Insert: A partir de agora trabalharemos  com itens do banco e portanto não precisamos de validações de campos de forma direta pois já temos os schemas que fazem isto e também temos o modelo do banco que não irá permitir certo tipo de dado.
+
+    from sqlalchemy.exc import SQLAlchemyError
+    IntegrityError: Quando os dados passados pode causar uma inconsistência no banco (Repetir os nomes).

@@ -1,5 +1,5 @@
 flask
+flask-sqlalchemy
 flask-smorest
 python-dotenv
-sqlalchemy
-flask-sqlalchemy
+marshmallow

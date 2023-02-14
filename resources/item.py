@@ -1,7 +1,10 @@
 import uuid
 from flask.views import MethodView
 from flask_smorest import Blueprint, abort
-from db import items
+from sqlalchemy.exc import SQLAlchemyError #Exception dos SQL errors
+
+from models import ItemModel
+from db import db
 from schemas import ItemSchema, ItemUpdateSchema
 
 blp = Blueprint("Items", __name__, description="Operations on items")
@@ -43,10 +46,12 @@ class  ItemList(MethodView):
     @blp.arguments(ItemSchema)
     @blp.response(201, ItemSchema)
     def post(self, item_data):
-        for item in items.values():
-            if (item_data["name"] == items["name"] and item_data["store_id"] == items["store_id"]):
-                abort(400, message='Item already exists.')
-        item_id = uuid.uuid4().hex
-        item = {**item_data, "id": item_id}
-        items[item_id] = item
+        item = ItemModel(**item_data)
+
+        try:
+            db.session.add(item)
+            db.session.commit()
+        except SQLAlchemyError:
+            abort(500, message="An error occurred while inserting the item.")
+
         return item
