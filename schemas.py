@@ -2,14 +2,14 @@ from marshmallow import Schema, fields
 
 
 class PlainItemSchema(Schema):
-    id = fields.Str(dump_only=True)
+    id = fields.Int(dump_only=True)
     name = fields.Str(required=True)
     price = fields.Float(required=True)
 
 
 class PlainStoreSchema(Schema):
-    id = fields.Str(dump_only=True)
-    name = fields.Str(required=True)
+    id = fields.Int(dump_only=True)
+    name = fields.Str()
 
 
 class ItemUpdateSchema(Schema):
@@ -18,7 +18,7 @@ class ItemUpdateSchema(Schema):
 
 
 class ItemSchema(PlainItemSchema):
-    stores_id = fields.Int(required=True, load_only=True)
+    store_id = fields.Int(required=True, load_only=True)
     store = fields.Nested(PlainStoreSchema(), dump_only=True)
 
 
