@@ -20,9 +20,8 @@ Foram criados 10 endpoints para a execução correta:
       {
         "name": "string"
       }
-      ```
-    
-    
+      ```   
+ ##
   
   1. get_item
   2. get_item/{id}
