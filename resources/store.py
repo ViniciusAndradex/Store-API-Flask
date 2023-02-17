@@ -12,28 +12,21 @@ blp = Blueprint("Stores", __name__, description="Operations on stores")
 class Store(MethodView):
     @blp.response(200, StoreSchema)
     def get(self, store_id):
-        try:
-            return stores[store_id]
-        except KeyError:
-            abort(404, message="Store not found.")
+        store = StoreModel.query.get_or_404(store_id)
+
+        return store
 
     def delete(self, store_id):
-        try:
-            del stores[store_id]
-            return {"message": "Store deleted."}
-        except KeyError:
-            abort(404, message="Store not found.")
+        store = StoreModel.query.get_or_404(store_id)
+
+        raise NotImplementedError("Deleting a store is not implemented")
 
     @blp.arguments(StoreSchema)
     @blp.response(200, StoreSchema)
     def put(self, store_data, store_id):
-        try:
-            store = stores[store_id]
-            store |= store_data
+        store = StoreModel.query.get_or_404(store_id)
 
-            return store
-        except KeyError:
-            abort(404, message="Store not found.")
+        raise NotImplementedError("Deleting a store is not implemented")
 
 @blp.route("/store")
 class StoresList(MethodView):

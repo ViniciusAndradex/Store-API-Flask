@@ -147,5 +147,12 @@ Configruando SQLAlchemy:
 ------------------------------------------------------------------------------
 Insert: A partir de agora trabalharemos  com itens do banco e portanto não precisamos de validações de campos de forma direta pois já temos os schemas que fazem isto e também temos o modelo do banco que não irá permitir certo tipo de dado.
 
+    'db.session.add()
+    db.session.commit()'
+
     from sqlalchemy.exc import SQLAlchemyError
     IntegrityError: Quando os dados passados pode causar uma inconsistência no banco (Repetir os nomes).
+
+Select: ItemModel.query.get_or_404(item_id) 
+    query: é possível se utilizar por conta do model do SQLAlchemy e permite fazer um get no banco de forma mais rápida/simples por conta disso, é utilizado quando queremos buscar ou fazer algo baseado em um valor transmitido por query.
+    get_or_404: busca e em caso de erro já retorna o erro.
