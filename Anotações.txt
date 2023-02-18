@@ -177,3 +177,9 @@ update: Por padrão faremos com que caso o usuário exija a modificação de alg
         db.session.commit()
 
         return item
+
+delete: var = model.query.get_or_404(var)
+
+        db.session.delete()
+        db.session.commit()
+        return {"message": ""}
