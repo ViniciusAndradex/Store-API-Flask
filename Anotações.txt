@@ -157,6 +157,8 @@ Select 1 : ItemModel.query.get_or_404(item_id)
     query: é possível se utilizar por conta do model do SQLAlchemy e permite fazer um get no banco de forma mais rápida/simples por conta disso, é utilizado quando queremos buscar ou fazer algo baseado em um valor transmitido por query.
     get_or_404: busca e em caso de erro já retorna o erro.
 
+Select *: utilizaremos o model.query.all() para obter o retono de tudo.
+
 update: Por padrão faremos com que caso o usuário exija a modificação de algo que não exista nós criaremos;
     para a nossa rest api:
         - adicionar um campo extra para store_id no model de schema
