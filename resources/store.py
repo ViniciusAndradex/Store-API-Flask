@@ -24,10 +24,19 @@ class Store(MethodView):
     @blp.arguments(StoreSchema)
     @blp.response(200, StoreSchema)
     def put(self, store_data, store_id):
-        store = StoreModel.query.get_or_404(store_id)
+        store = StoreModel.query.get(store_id)
 
-        raise NotImplementedError("Deleting a store is not implemented")
+        if store:
+            store.name = store_data["name"]
+        else:
+            store = StoreModel(id=store_id, **store_data)
+        
+        db.session.add(store)
+        db.session.commit()
 
+        return store
+
+        
 @blp.route("/store")
 class StoresList(MethodView):
     @blp.response(200, StoreSchema(many=True))
