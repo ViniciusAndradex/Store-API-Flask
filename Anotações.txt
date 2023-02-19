@@ -183,4 +183,3 @@ delete: var = model.query.get_or_404(var)
         db.session.delete()
         db.session.commit()
         return {"message": ""}
-    
