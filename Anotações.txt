@@ -184,3 +184,5 @@ delete: var = model.query.get_or_404(var)
         db.session.commit()
         return {"message": ""}
         
+Cascade: Os objetos associados a outros passam a ter a propriedade de ser excluído junto deles, ou seja, se uma store que possui items for excluída os items também são. No pai devemos adicionar um argumento no relacionamento:
+    cascade="all, delete" # delete-orphan
