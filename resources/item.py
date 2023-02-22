@@ -25,7 +25,7 @@ class Item(MethodView):
         return {"message": "Item deleted."}
 
     @blp.arguments(ItemUpdateSchema)
-    @blp.response(200, ItemSchema)
+    @blp.response(200, ItemUpdateSchema)
     def put(self, item_data, item_id):
         item = ItemModel.query.get(item_id)
         
