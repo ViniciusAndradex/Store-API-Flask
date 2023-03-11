@@ -55,7 +55,10 @@ _Desta forma você está criando o seu ambiente virtual python._
 #### 2. Ativar o seu ambiente python no terminal:
 ```. venv/bin/activate```
 
-#### 3. Ligar a sua API com o comando:
+#### 3. Utilizar o comando:
+```pip install -r requirements.txt```
+
+#### 4. Rodar a sua API com o comando:
 ```flask run```
 
 ### Observação

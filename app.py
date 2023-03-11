@@ -27,7 +27,7 @@ def create_app(db_url=None):
     with app.app_context():
         db.create_all()
 
-    # Unificando as partes criadas com o print
+    # Unificando as partes criadas com o blueprint
     api.register_blueprint(ItemBluePrint)
     api.register_blueprint(StoreBluePrint)
     api.register_blueprint(TagBluePrint)
