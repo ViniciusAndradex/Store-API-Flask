@@ -6,7 +6,7 @@ from db import db
 from models import TagModel, StoreModel
 from schemas import TagSchema
 
-blp = Blueprint("Tag", __name__, description="Operations on Tag")
+blp = Blueprint("Tags", __name__, description="Operations on Tag")
 
 @blp.route("/store/<string:store_id>/tag")
 class TagInStore(MethodView):
@@ -19,8 +19,8 @@ class TagInStore(MethodView):
     @blp.arguments(TagSchema)
     @blp.response(201, TagSchema)
     def post(self, tag_data, store_id):
-        if TagModel.query.filter(TagModel.store_id == store_id, TagModel.name == tag_data["name"]).first():
-            abort(400, message="Tag name already exist in that store")
+        # if TagModel.query.filter(TagModel.store_id == store_id, TagModel.name == tag_data["name"]).first():
+        #     abort(400, message="Tag name already exist in that store.")
         tag = TagModel(**tag_data, store_id=store_id)
 
         try:
@@ -29,7 +29,7 @@ class TagInStore(MethodView):
         except SQLAlchemyError as e:
             abort(
                 500,
-                message=str(e),
+                message=str(e)
             )
 
         return tag
@@ -41,3 +41,9 @@ class Tag(MethodView):
     def get(self, tag_id):
         tag =  TagModel.query.get_or_404(tag_id)
         return tag
+    
+@blp.route('/tag')
+class AllTags(MethodView):
+    @blp.response(200, TagSchema(many=True))
+    def get(self):
+        return TagModel.query.all()
