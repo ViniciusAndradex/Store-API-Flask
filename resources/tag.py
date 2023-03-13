@@ -74,6 +74,15 @@ class LinkTagsToItem(MethodView):
             abort(500, message="An error occurred while inserting the tag.")
         
         return {"message": "Item removed from tag", "item": item, "tag": tag}
+    
+    @blp.response(201, TagAndItemSchema)
+    def get(self, item_id, tag_id):
+        item = ItemModel.query.get_or_404(item_id)
+        tag = TagModel.query.get_or_404(tag_id)
+
+        if not item.store_id == tag.store_id:
+            abort(400, message="It is not possible to associate this tag with an item that already has a store.")
+        return {"message": "The item and the tag have the same store, we can associate them.", "item": item, "tag": tag} 
 
 @blp.route("/tag/<string:tag_id>")
 class Tag(MethodView):
