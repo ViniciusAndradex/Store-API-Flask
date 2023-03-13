@@ -190,3 +190,7 @@ Cascade: Os objetos associados a outros passam a ter a propriedade de ser exclu�
 Tag: Devemos criar um modelo para tag onde nele existe um relacionamento com as meus outros modelos.Algumas coisas que devemos mutiplicar são por exemplo tags que com nomes iguais, essa verificação pode ser feita de duas formas:
     1. Por o atributo name como unique.
     2. Fazer uma verificação manual o que vai permitir ao nosso sistema criar tags com nomes iguais para coisas diferentes.
+--------------------------------------------------------------------------------
+
+Para fazer um post com uma relação m - n:
+    
