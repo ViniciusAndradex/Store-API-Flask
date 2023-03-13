@@ -1,8 +1,13 @@
-from flask import Flask
 import os
+import secrets
+
+from flask import Flask
 from flask_smorest import Api
+from flask_jwt_extended import JWTManager
+
 from db import db
 import models
+
 from resources.item import blp as ItemBluePrint
 from resources.store import blp as StoreBluePrint
 from resources.tag import blp as TagBluePrint
@@ -21,8 +26,10 @@ def create_app(db_url=None):
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     app.config["PROPAGATE_EXCEPTIONS"] = True
     db.init_app(app)
+    app.config["JWT_SECRET_KEY"] = "229932731461045123486897919252163073065"
 
     api = Api(app)
+    jwt = JWTManager(app)
     
     with app.app_context():
         db.create_all()
