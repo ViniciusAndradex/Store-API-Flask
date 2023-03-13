@@ -43,7 +43,7 @@ class AllTags(MethodView):
         return TagModel.query.all()
     
 
-@blp.route("/tag/<string:item_id>/tag/<string:tag_id>")
+@blp.route("/item/<string:item_id>/tag/<string:tag_id>")
 class LinkTagsToItem(MethodView):
     @blp.response(201, TagSchema)
     def post(self, item_id, tag_id):

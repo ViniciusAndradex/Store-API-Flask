@@ -192,5 +192,8 @@ Tag: Devemos criar um modelo para tag onde nele existe um relacionamento com as 
     2. Fazer uma verificação manual o que vai permitir ao nosso sistema criar tags com nomes iguais para coisas diferentes.
 --------------------------------------------------------------------------------
 
-Para fazer um post com uma relação m - n:
-    
+JWT
+    Criar uma configuração de secret key:
+        app.config["JWT_SECRET_KEY"] = ? -> Maneira de garantir a segurança do site pois faz a comparação um JWT enviado por um site e garante que não é um criado por apps externos. Para garantir uma seguraça utilizaremos de um biblioteca para gerar uma chave segura (Por enquanto valor gerado somente 1 vez).
+    Criar uma instancia no app com o JWTManager.
+        jwt = JWTManager(app)
