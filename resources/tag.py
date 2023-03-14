@@ -9,7 +9,7 @@ from schemas import TagSchema, TagAndItemSchema
 blp = Blueprint("Tags", __name__, description="Operations on Tag")
 
 
-@blp.route("/store/<string:store_id>/tag")
+@blp.route("/store/<int:store_id>/tag")
 class TagInStore(MethodView):
     @blp.response(200, TagSchema(many=True))
     def get(self, store_id):
@@ -43,7 +43,7 @@ class AllTags(MethodView):
         return TagModel.query.all()
     
 
-@blp.route("/item/<string:item_id>/tag/<string:tag_id>")
+@blp.route("/item/<int:item_id>/tag/<int:tag_id>")
 class LinkTagsToItem(MethodView):
     @blp.response(201, TagSchema)
     def post(self, item_id, tag_id):
@@ -84,7 +84,7 @@ class LinkTagsToItem(MethodView):
             abort(400, message="It is not possible to associate this tag with an item that already has a store.")
         return {"message": "The item and the tag have the same store, we can associate them.", "item": item, "tag": tag} 
 
-@blp.route("/tag/<string:tag_id>")
+@blp.route("/tag/<int:tag_id>")
 class Tag(MethodView):
     @blp.response(200, TagSchema)
     def get(self, tag_id):
@@ -100,7 +100,7 @@ class Tag(MethodView):
     @blp.alt_response(404, description="Tag not found.")
     @blp.alt_response(
         400, 
-        description="Returned if tag is assigned to one or more items. In this case, the tag is not deletd."
+        description="Returned if tag is assigned to one or more items. In this case, the tag is not deleted."
         )
     def delete(self, tag_id):
         tag = TagModel.query.get_or_404(tag_id)
