@@ -11,6 +11,7 @@ import models
 from resources.item import blp as ItemBluePrint
 from resources.store import blp as StoreBluePrint
 from resources.tag import blp as TagBluePrint
+from resources.user import blp as UserBluePrint
 
 def create_app(db_url=None):
     app = Flask(__name__)
@@ -26,9 +27,10 @@ def create_app(db_url=None):
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     app.config["PROPAGATE_EXCEPTIONS"] = True
     db.init_app(app)
-    app.config["JWT_SECRET_KEY"] = "229932731461045123486897919252163073065"
 
     api = Api(app)
+    
+    app.config["JWT_SECRET_KEY"] = "229932731461045123486897919252163073065"
     jwt = JWTManager(app)
     
     with app.app_context():
@@ -38,5 +40,6 @@ def create_app(db_url=None):
     api.register_blueprint(ItemBluePrint)
     api.register_blueprint(StoreBluePrint)
     api.register_blueprint(TagBluePrint)
+    api.register_blueprint(UserBluePrint)
 
     return app

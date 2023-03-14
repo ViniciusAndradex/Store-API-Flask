@@ -197,3 +197,5 @@ JWT
         app.config["JWT_SECRET_KEY"] = ? -> Maneira de garantir a segurança do site pois faz a comparação um JWT enviado por um site e garante que não é um criado por apps externos. Para garantir uma seguraça utilizaremos de um biblioteca para gerar uma chave segura (Por enquanto valor gerado somente 1 vez).
     Criar uma instancia no app com o JWTManager.
         jwt = JWTManager(app)
+*-------------------------------------------------------------------------------
+pbkdf2_sha256 -> Serve para transformar a senha do usuário em um hash para evitar que a senha seja exposta e portanto no banco permanece o valor em hash

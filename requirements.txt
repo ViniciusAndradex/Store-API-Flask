@@ -5,3 +5,4 @@ flask-smorest
 python-dotenv
 marshmallow
 flask-jwt-extended
+passlib
