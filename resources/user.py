@@ -48,3 +48,4 @@ class User(MethodView):
             abort(500, message="An error occurred whilte inserting the item.")
 
         return {"message": "User deleted."}
+    
