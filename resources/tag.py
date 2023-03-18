@@ -93,11 +93,13 @@ class Tag(MethodView):
         return tag
     
     @blp.response(
-            202, 
+            status_code=202, 
             description="Deletes a tag if no item is tagged with it.",
-            example={"message":"Tag deleted."}
+            example={"message":"Tag deleted."},
+            content_type="application/json",
+            schema=TagSchema
         )
-    @blp.alt_response(404, description="Tag not found.")
+    @blp.alt_response(404, description="Tag not found.", example={"message": "Tag not found."})
     @blp.alt_response(
         400, 
         description="Returned if tag is assigned to one or more items. In this case, the tag is not deleted."
