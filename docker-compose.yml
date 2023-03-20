@@ -1,0 +1,18 @@
+version: '3'
+services:
+  redis: 
+    image: redis/redis-stack
+    container_name: redis
+    ports:
+      - '6379:6379'
+      - '8001:8001'
+  web:
+    container_name: flask-smorest-api
+    image: flask-smorest-api:latest
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '5000:5000'
+    depends_on:
+      - redis

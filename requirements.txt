@@ -6,3 +6,4 @@ python-dotenv
 marshmallow
 flask-jwt-extended
 passlib
+redis
