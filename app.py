@@ -1,11 +1,11 @@
 import os
-import secrets
 
 from flask import Flask, jsonify
 from flask_smorest import Api
 from flask_jwt_extended import JWTManager
 
 from db import db
+from blocklist import jwt_redis_blocklist, ACCESS_EXPIRE
 import models
 
 from resources.item import blp as ItemBluePrint
@@ -31,7 +31,20 @@ def create_app(db_url=None):
     api = Api(app)
     
     app.config["JWT_SECRET_KEY"] = "229932731461045123486897919252163073065"
+    app.config["JWT_ACCESS_TOKEN_EXPIRES"] = ACCESS_EXPIRE
     jwt = JWTManager(app)
+
+    @jwt.token_in_blocklist_loader
+    def check_if_token_is_blocklist(jwt_header, jwt_payload):
+        return jwt_payload["jti"] in jwt_redis_blocklist.get(jwt_payload["jti"])
+    
+    @jwt.revoked_token_loader
+    def revoked_token_callback(jwt_header, jwt_payload):
+        return (
+            jsonify(
+                {"description": "The token has been revoked.", "error": "token_revoked"}
+            ), 401,
+        )
 
     @jwt.additional_claims_loader
     def add_claim_to_jwt(identity):
