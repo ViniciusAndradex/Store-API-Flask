@@ -41,8 +41,6 @@ class UserLogin(MethodView):
         if user and pbkdf2_sha256.verify(user_data["password"], user.password):
             access_token = create_access_token(identity=user.id, fresh=True)
             refresh_token = create_refresh_token(identity=user.id)
-            jti = get_jwt()["jti"]
-            jwt_redis_blocklist.append(jti)
             return {"access_token": access_token, "refresh_token": refresh_token}
  
         abort(401, message="Invalid credentials.")
@@ -50,10 +48,12 @@ class UserLogin(MethodView):
 
 @blp.route("/refresh")
 class TokenRefrsh(MethodView):
-    @jwt_required(fresh=True)
+    @jwt_required(refresh=True)
     def post(self):
         current_user = get_jwt_identity()
         new_token = create_access_token(identity=current_user, fresh=False)
+        jti = get_jwt()["jti"]
+        jwt_redis_blocklist.append("jti", jti)
         return {"access_token": new_token}
 
 @blp.route("/logout")
