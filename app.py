@@ -3,6 +3,7 @@ import os
 from flask import Flask, jsonify
 from flask_smorest import Api
 from flask_jwt_extended import JWTManager
+from flask_migrate import Migrate
 
 from db import db
 from blocklist import jwt_redis_blocklist, ACCESS_EXPIRE
@@ -27,7 +28,7 @@ def create_app(db_url=None):
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     app.config["PROPAGATE_EXCEPTIONS"] = True
     db.init_app(app)
-
+    migrate = Migrate(app, db)
     api = Api(app)
     
     app.config["JWT_SECRET_KEY"] = "229932731461045123486897919252163073065"
@@ -80,9 +81,6 @@ def create_app(db_url=None):
         return (
             jsonify({"description": "Request does not contain an access token.", "error": "authorization_required."}), 401,
         )
-    
-    with app.app_context():
-        db.create_all()
 
     # Unificando as partes criadas com o blueprint
     api.register_blueprint(ItemBluePrint)

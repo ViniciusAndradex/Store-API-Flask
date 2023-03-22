@@ -199,3 +199,12 @@ JWT
         jwt = JWTManager(app)
 *-------------------------------------------------------------------------------
 pbkdf2_sha256 -> Serve para transformar a senha do usuário em um hash para evitar que a senha seja exposta e portanto no banco permanece o valor em hash
+
+
+para iniciar a pasta de migrações: flask db init no terminal.
+para gerar as versões de migração: falsk db migrate no terminal.
+para criar os dados no banco: falsk db upgrade no terminal.
+para desfazer uma alteração feita para os models do banco: falsk db downgrade no terminal.
+
+Estas mudanças são observadas no arquivo de versions do migrations.
+Podemos fazer alterações via SQL: op.execute(código sql).

@@ -53,7 +53,8 @@ class TokenRefrsh(MethodView):
         current_user = get_jwt_identity()
         new_token = create_access_token(identity=current_user, fresh=False)
         jti = get_jwt()["jti"]
-        jwt_redis_blocklist.append("jti", jti)
+        jwt_redis_blocklist.append(f'used-jwt_token-{get_jwt()["iat"]}', jti)
+
         return {"access_token": new_token}
 
 @blp.route("/logout")
@@ -61,7 +62,7 @@ class UserLogout(MethodView):
     @jwt_required()
     def post(self):
         jti = get_jwt()["jti"]
-        jwt_redis_blocklist.set(jti, ex=ACCESS_EXPIRE)
+        jwt_redis_blocklist.set(f'logged-out-jwt_token-{get_jwt()["iat"]}', jti, ex=ACCESS_EXPIRE)
         return {"message": "Successfully logged out."}
 
 
